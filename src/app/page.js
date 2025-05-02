@@ -1,10 +1,75 @@
+"use client";
+
+
 import Image from "next/image";
 import styles from "./page.module.css";
 
+const Intro = () => {
+  return (
+    <p>
+    Hello! My name is Zaheer, and I am a software developer with a passion for creating web applications.
+    I enjoy working with modern frameworks like Next.js and exploring new technologies.
+    </p>
+  )
+}
+
+const Interests = () => {
+  return (
+    <p>
+    In my free time, I like to read, learn about new programming trends, and contribute to open-source projects.
+    </p>
+  )
+}
+
+const Qualifications = (props) => {
+  console.log(props)
+  return (
+    <>
+      <p>Highest Degree: {props.degree}</p>
+      <p>{props.abroad ? "Foreign Degree" : "Local Degree"}</p>
+      <p>First Degree: {props.degreenames.first}</p>
+      <p>Second Degree: {props.degreenames.second}</p>
+      <p>Year of Graduation: {props.year}</p>
+      <p>{props.grades.map((g) => <li>{g}</li>)}</p>
+    </>
+  )
+}
+
 export default function Home() {
+  const skills = <p>JavaScript, React, Next.js, Node.js, Express, MongoDB</p>;
+  const myfun = () => 5 + 5;
+  var x = 15;
+  return (
+    <div>
+      <h2>Biography {x <= 10 ? "less than 10" : "greater"}</h2>
+      <br />
+      <h3>Introduction</h3>
+      <Intro />
+      <br />
+      <h3>Interests</h3>
+      <Interests />
+      <br />
+      <h3>Skills</h3>
+      {skills}
+      <br />
+      <h3>Qualifications</h3>
+      <Qualifications 
+        degree="MSc"  
+        abroad={false} 
+        year={18} 
+        grades={[3.5, 3.8]} 
+        degreenames={{first: "BS", second: "MS"}} 
+      />
+    </div>
+  )
+}
+
+
+function Home2() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <h2>Zaheer</h2>
         <Image
           className={styles.logo}
           src="/next.svg"

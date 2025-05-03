@@ -4,13 +4,67 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-const Intro = () => {
+const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+}, {
+  id: 2,
+  name: 'Mohammad Abdus Salam',
+  profession: 'physicist',
+}, {
+  id: 3,
+  name: 'Percy Lavon Julian',
+  profession: 'chemist',  
+}, {
+  id: 4,
+  name: 'Subrahmanyan Chandrasekhar',
+  profession: 'astrophysicist',
+}];
+
+const PeopleList = () => {
   return (
-    <p>
-    Hello! My name is Zaheer, and I am a software developer with a passion for creating web applications.
-    I enjoy working with modern frameworks like Next.js and exploring new technologies.
-    </p>
+    <div>
+      <h2>People</h2>
+      {console.log("List of Persons")}
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Profession</th>
+        </tr>
+        {people.map( (p, i) => <tr key={p.id}>
+                            <td className={styles.td}>{i+1}: {p.name}</td>
+                            <td className={styles.td}>{p.profession}</td>
+                            </tr>
+                  )}
+      </table>
+    </div>
   )
+}
+
+const Graduated = ({year}) => {
+  return (
+    <div>
+      {year && <h2>Graduated</h2>}
+    </div>
+  );
+}
+
+const Intro = ({name = 'Zaheer'}) => {
+  if(name) {
+    return (
+      <p>
+      Hi! My name is {name}, and I am a software developer with a passion for creating web applications.
+      I enjoy working with modern frameworks like Next.js and exploring new technologies.
+      </p>
+    )
+  } else {
+    return <p>You must provide name</p>
+  }
 }
 
 const Interests = () => {
@@ -41,10 +95,11 @@ export default function Home() {
   var x = 15;
   return (
     <div>
+      <PeopleList />
       <h2>Biography {x <= 10 ? "less than 10" : "greater"}</h2>
       <br />
       <h3>Introduction</h3>
-      <Intro />
+      <Intro name='Ahmad' />
       <br />
       <h3>Interests</h3>
       <Interests />
@@ -60,6 +115,7 @@ export default function Home() {
         grades={[3.5, 3.8]} 
         degreenames={{first: "BS", second: "MS"}} 
       />
+      <Graduated />
     </div>
   )
 }

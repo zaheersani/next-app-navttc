@@ -7,6 +7,8 @@ import styles from "./page.module.css";
 import { Intro } from "./biography";
 import { Graduated } from "./biography";
 
+import TODO from "./todo-app/todo";
+
 import React from "react";
 
 const Counter = () => {
@@ -61,8 +63,9 @@ export default function Home() {
 
   return (
     <main>
+      <TODO />
       
-      <Intro />
+      {/* <Intro />
       <br />
       <Counter />
       <br />
@@ -72,7 +75,7 @@ export default function Home() {
       <br />
       <button onClick={() => alert('This is 3rd Button')}>Click Me 3</button>
 
-      <Signup event={handleSignupClick} />
+      <Signup event={handleSignupClick} /> */}
     </main> 
   )
 }

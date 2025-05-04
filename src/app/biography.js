@@ -1,3 +1,5 @@
+import React, {useState} from "react";
+
 export const Graduated = ({year}) => {
     return (
       <div>
@@ -7,15 +9,33 @@ export const Graduated = ({year}) => {
   }
   
   export const Intro = ({name = 'Zaheer'}) => {
-    if(name) {
-      return (
-        <p>
-        Hi! My name is {name}, and I am a software developer with a passion for creating web applications.
-        I enjoy working with modern frameworks like Next.js and exploring new technologies.
-        </p>
-      )
+    var [show, setShow] = useState(false);
+    if(show) {
+      if(name) {
+        return (
+          <>
+            <h3>Introduction</h3>
+            <button
+              onClick={() => setShow(false)}
+            >{show ? 'Hide' : 'Show'} details</button>
+            <p>
+            Hi! My name is {name}, and I am a software developer with a passion for creating web applications.
+            I enjoy working with modern frameworks like Next.js and exploring new technologies.
+            </p>
+          </>
+        )
+      } else {
+        return <p>You must provide name</p>
+      }
     } else {
-      return <p>You must provide name</p>
+      return (
+        <>
+          <h3>Introduction</h3>
+          <button
+            onClick={() => setShow(true)}
+          >show details</button>
+        </>
+      )
     }
   }
   

@@ -4,6 +4,9 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
+import { Intro } from "./biography";
+import { Graduated } from "./biography";
+
 import React from "react";
 
 const Counter = () => {
@@ -20,9 +23,15 @@ const Counter = () => {
     <>
     <h1>Counter Component</h1>
     <div style={{display: "flex", alignItems: "center"}}>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button 
+        onClick={() => setCount(count - 1)}
+        disabled={count <= 1}
+      >Decrement</button>
       <h4>{count}</h4>
-      <button onClick={inc}>Increment</button>
+      <button 
+        onClick={inc}
+        disabled={count >= 10}
+      >Increment</button>
     </div>
     </>
   )
@@ -52,6 +61,9 @@ export default function Home() {
 
   return (
     <main>
+      
+      <Intro />
+      <br />
       <Counter />
       <br />
       <h1>Welcome</h1>

@@ -14,10 +14,18 @@ import React from "react";
 const Counter = () => {
 
   let [count, setCount] = React.useState(5);
+  // let count = 5;
+  // const setCount = (newCount) => {
+  //   count = newCount;
+  //   console.log(count);
+  // }
 
   // var count = 20;
   const inc = () => {
-    setCount(count + 1);
+    setCount(prev => prev + 1);
+    setCount(prev => prev + 1);
+    // setCount(count + 1);
+    // setCount(count + 1);
     console.log(count);
   }
 
@@ -61,13 +69,19 @@ export default function Home() {
     alert("Signup button clicked!");
   }
 
+  const [showAll, setShowAll] = React.useState(false);
+
   return (
     <main>
       <TODO />
-      
-      {/* <Intro />
+      {/* <Counter /> */}
+      {/* <h1>Biography</h1>
+      <button 
+        onClick={() => setShowAll(!showAll)}
+      >{showAll ? "Hide" : "Show"} All</button>
+      <Intro showAll={showAll} />
       <br />
-      <Counter />
+      
       <br />
       <h1>Welcome</h1>
       <button onClick={handleClick}>Click Me</button>

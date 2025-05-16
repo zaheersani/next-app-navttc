@@ -8,15 +8,19 @@ export const Graduated = ({year}) => {
     );
   }
   
-  export const Intro = ({name = 'Zaheer'}) => {
-    var [show, setShow] = useState(false);
+  export const Intro = ({name = 'Zaheer', showAll = false}) => {
+    var [show, setShow] = useState(showAll);
+    // setShow(showAll);
+    // if(show !== showAll) {
+    //   setShow(showAll);
+    // }
     if(show) {
       if(name) {
         return (
           <>
             <h3>Introduction</h3>
             <button
-              onClick={() => setShow(false)}
+              onClick={() => setShow(!show)}
             >{show ? 'Hide' : 'Show'} details</button>
             <p>
             Hi! My name is {name}, and I am a software developer with a passion for creating web applications.

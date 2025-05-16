@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 
 const TodoApp = () => {
-    const [todoList, setTodoList] = useState([{task: 'item1', completed: false}, 'item2']);
+    const [todoList, setTodoList] = useState([
+        {task: 'item1', completed: false},
+        {task: 'item1', completed: true}
+    ]);
+
+    console.log(todoList);
+    // const [todoList, setTodoList] = useState(['item1', 'item2']);
     // const todoList = ['item1', 'item3'];
 
     let [todo, setTodo] = useState('');
@@ -9,13 +15,14 @@ const TodoApp = () => {
     // console.log(todoList);
 
     const handleTodoAdd = () => {
-        // var arr = todoList.concat('item3');
-        // console.log(arr);
-        // setTodoList(arr);
-        console.log(todo.length);
-        setTodoList([...todoList, todo.trim()]);
-        // console.log(todoList);
-        // alert('Todo added!');
+        setTodoList([
+            ...todoList, 
+            { 
+                task: todo.trim(),
+                completed: false
+            }
+        ]);
+        // Reset Input Box
         setTodo('');
     }
 
@@ -41,8 +48,11 @@ const TodoApp = () => {
             {todoList.length === 0 && <p>No tasks available</p>}
             {todoList.map( (item, index) => (
                 <div key={index} style={{width: '30%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
-                    <input type='checkbox' checked={item.completed} />
-                    <p style={{textDecoration: "line-through"}}>{item.task}</p>
+                    <input 
+                        type='checkbox' 
+                        checked={item.completed}
+                    />
+                    <p style={{textDecoration: item.completed ? 'line-through' : 'none'}} >{item.task}</p>
                     <button
                         onClick={() => handleTodoDelete(index)}
                     >Delete</button>

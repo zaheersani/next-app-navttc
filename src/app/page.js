@@ -8,6 +8,7 @@ import { Intro } from "./biography";
 import { Graduated } from "./biography";
 
 import TODO from "./todo-app/todo";
+import TODOAPI from "./todo-app/todoAPI";
 
 import React from "react";
 
@@ -73,7 +74,8 @@ export default function Home() {
 
   return (
     <main>
-      <TODO />
+      <TODOAPI />
+      {/* <TODO /> */}
       {/* <Counter /> */}
       {/* <h1>Biography</h1>
       <button 

@@ -1,3 +1,5 @@
+'use client'
+
 import React, {useState} from "react";
 
 export const Graduated = ({year}) => {
@@ -10,10 +12,6 @@ export const Graduated = ({year}) => {
   
   export const Intro = ({name = 'Zaheer', showAll = false}) => {
     var [show, setShow] = useState(showAll);
-    // setShow(showAll);
-    // if(show !== showAll) {
-    //   setShow(showAll);
-    // }
     if(show) {
       if(name) {
         return (
@@ -62,5 +60,33 @@ export const Graduated = ({year}) => {
         <p>Year of Graduation: {props.year}</p>
         <p>{props.grades.map((g) => <li>{g}</li>)}</p>
       </>
+    )
+  }
+
+  export default function Biography() {
+    const [showAll, setShowAll] = useState(false);
+    const [year, setYear] = useState(2023);
+    const [degree, setDegree] = useState("BSCS");
+    const [grades, setGrades] = useState([3.5, 3.7, 3.8]);
+    const [abroad, setAbroad] = useState(false);
+    const [degreenames, setDegreenames] = useState({first: "BSCS", second: "MSCS"});
+  
+    return (
+      <main>
+        <h1>Biography</h1>
+        <button 
+          onClick={() => setShowAll(!showAll)}
+        >{showAll ? "Hide" : "Show"} All</button>
+        <Intro showAll={showAll} />
+        <Interests />
+        <Qualifications 
+          degree={degree}
+          abroad={abroad}
+          year={year}
+          grades={grades}
+          degreenames={degreenames}
+        />
+        <Graduated year={year} />
+      </main>
     )
   }

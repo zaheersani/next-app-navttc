@@ -4,11 +4,11 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-import { Intro } from "./biography";
-import { Graduated } from "./biography";
+import { Intro } from "./biography/page";
+import { Graduated } from "./biography/page";
 
-import TODO from "./todo-app/todo";
-import TODOAPI from "./todo-app/todoAPI";
+import TODO from "./dashboard/todo-app/page";
+import TODOAPI from "./dashboard/todo-app-api/page";
 
 import React from "react";
 

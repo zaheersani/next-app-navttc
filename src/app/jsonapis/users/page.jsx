@@ -25,7 +25,7 @@ const UsersPage = () => {
             <ul>
                 {users.map((user) => (
                     <li key={user.id}>
-                        <strong style={{}}><Link href={`/users/${user.id}`} className="nav-link">{user.name}</Link></strong> ({user.email})
+                        <strong style={{}}><Link href={`users/${user.id}`} className="nav-link">{user.name}</Link></strong> ({user.email})
                     </li>
                 ))}
             </ul>

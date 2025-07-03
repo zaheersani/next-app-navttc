@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react";
+import WeatherDetails from "@/app/components/weathercomponent";
 
 const APIKEY = process.env.NEXT_PUBLIC_RAPIDAPI_KEY;
 
@@ -8,6 +9,7 @@ export default function Countries () {
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState("");
+    const [weather, setWeather] = useState(null);
 
     useEffect(async () => {
         const url = 'https://city-list.p.rapidapi.com/api/getCountryList';
@@ -70,58 +72,75 @@ export default function Countries () {
         };
 
         try {
-            const response = fetch(url, options).then(res => res.json()).then(data => {
-            console.log(data);
-            //   setWeather(data);
+            fetch(url, options).then(res => res.json()).then(data => {
+                console.log(data);
+                setWeather(data);
             });
-            // const result = await response.json();
-            // console.log(result);
         } catch (error) {
             console.error(error);
         }
     }
 
     return (
-        <div>
-            <h1>Countries</h1>
-            <p>List of countries</p>
-            <select onChange={(e) => getCities(e.target.value)}>
-                    {countries.map((country, index) => (
-                            <option 
-                            key={index} 
-                            value={country.iso}
-                            >
-                            {country.cname}
-                            </option>
-                    ))}
+        <div className="mx-auto mt-10 mb-10 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center">
+            <h1 className="text-3xl font-bold mb-2 text-gray-800">Countries</h1>
+            <p className="mb-6 text-gray-600">List of countries</p>
+            <select
+                onChange={(e) => getCities(e.target.value)}
+                className="w-full p-2 mb-6 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+                <option value="">Select a country</option>
+                {countries.map((country, index) => (
+                    <option
+                        key={index}
+                        value={country.iso}
+                    >
+                        {country.cname}
+                    </option>
+                ))}
             </select>
 
-            {cities.length <= 0 && <p>Loading Cities ... </p>}
-            {cities.length > 0 && <p>List of cities ({cities.length}) in the selected country</p>}
+            {cities.length <= 0 && (
+                <p className="text-blue-500 mb-4">Loading Cities ... </p>
+            )}
+            {cities.length > 0 && (
+                <p className="mb-4 text-gray-700">
+                    List of cities ({cities.length}) in the selected country
+                </p>
+            )}
 
-            {cities.length > 0 && 
-            <>
-                <input
-                        list="cities-list"
-                        placeholder="Search city..."
-                        autoComplete="on"
-                        onChange={(e) => setCity(e.target.value)}
-                />
-                <datalist 
-                    id="cities-list"
-                >
+            {cities.length > 0 && (
+                <>
+                    <div className="flex items-center gap-4 mb-4 w-full">
+                        <input
+                            list="cities-list"
+                            placeholder="Search city..."
+                            autoComplete="on"
+                            onChange={(e) => setCity(e.target.value)}
+                            className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        />
+                        <button
+                            onClick={getWeatherData}
+                            className="text-white bg-blue-700 hover:bg-blue-800 font-small rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                        >
+                            Get Weather
+                        </button>
+                    </div>
+                    <datalist id="cities-list">
                         {cities.map((city, index) => (
-                                <option
-                                        key={index}
-                                        value={city.name}
-                                />
+                            <option
+                                key={index}
+                                value={city.name}
+                            />
                         ))}
-                </datalist>
-                <button 
-                    onClick={getWeatherData}
-                >Get Weather</button>
-            </>
-            }
+                    </datalist>
+                    {weather && (
+                        <div className="mt-8 mb-8 flex justify-center w-full">
+                            <WeatherDetails data={weather} className="w-full" />
+                        </div>
+                    )}
+                </>
+            )}
         </div>
     );
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import WeatherDetails from "@/app/components/weathercomponent";
 
 const APIKEY = process.env.NEXT_PUBLIC_RAPIDAPI_KEY;
 
@@ -59,12 +60,10 @@ export default function Location() {
       };
 
       try {
-        const response = fetch(url, options).then(res => res.json()).then(data => {
+        fetch(url, options).then(res => res.json()).then(data => {
           console.log(data);
           setWeather(data);
         });
-        // const result = await response.json();
-        // console.log(result);
       } catch (error) {
         console.error(error);
       }
@@ -86,21 +85,7 @@ export default function Location() {
       <br />
       <p>This page retrieves your current geographical location using the Geolocation API.</p>
       <p>Check the console for your location details.</p>
-      
-      <h1>Weather of {weather && weather.name}</h1>
-      {weather && (
-        <div>
-          <h2>Weather Details:</h2>
-          <p>
-            Temperature: {weather.main && (weather.main.temp - 273.15).toFixed(2)}°C
-          </p>
-          <p>Humidity: {weather.main && weather.main.humidity}%</p>
-          <p>Weather: {weather.weather && weather.weather[0].description}</p>
-          <p>Min Temperature: {(weather.main.temp_min - 273.15).toFixed(2)}°C </p>
-        </div>
-      )}
-      {!weather && <p>Loading weather data...</p>}
+      <WeatherDetails data={weather} />
     </div>
   );
 }
-

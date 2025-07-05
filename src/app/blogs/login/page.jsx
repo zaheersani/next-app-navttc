@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-const BASEURL = process.env.BASEURL || 'http://localhost:5000'; // Fallback for local development
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL || 'http://localhost:5000'; // Fallback for local development
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");

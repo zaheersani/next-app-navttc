@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-console.log(process.env.BASEURL);
+console.log(process.env.NEXT_PUBLIC_BASEURL);
 
-const BASEURL = process.env.BASEURL || 'http://localhost:5000'; // Fallback for local development
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL || 'http://localhost:5000'; // Fallback for local development
 
 export default function BlogsPage() {
     const [blogs, setBlogs] = useState([]);

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-const BASEURL = process.env.BASEURL || 'http://localhost:5000'; // Fallback for local development
+const BASEURL = process.env.NEXT_PUBLIC_BASEURL || 'http://localhost:5000'; // Fallback for local development
 
 export default function BlogsDashboard() {
     const [blogs, setBlogs] = useState([]);

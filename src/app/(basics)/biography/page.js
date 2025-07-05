@@ -58,7 +58,7 @@ export const Graduated = ({year}) => {
         <p>First Degree: {props.degreenames.first}</p>
         <p>Second Degree: {props.degreenames.second}</p>
         <p>Year of Graduation: {props.year}</p>
-        <p>{props.grades.map((g) => <li>{g}</li>)}</p>
+        <p>{props.grades.map((g,i) => <li key={i}>{g}</li>)}</p>
       </>
     )
   }

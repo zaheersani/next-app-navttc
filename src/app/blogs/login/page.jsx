@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
+const BASEURL = process.env.BASEURL || 'http://localhost:5000'; // Fallback for local development
+
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -11,7 +13,7 @@ export default function LoginPage() {
         e.preventDefault();
         setError("");
         try {
-            const res = await fetch("http://localhost:5000/user/login", {
+            const res = await fetch(`${BASEURL}/user/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -33,7 +35,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="flex items-center justify-center">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
                 <h2 className="text-2xl font-bold text-center mb-6">Login to Blogs Platform</h2>
                 <form className="space-y-5" onSubmit={handleSubmit}>

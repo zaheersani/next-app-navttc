@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 
+const BASEURL = process.env.BASEURL || 'http://localhost:5000'; // Fallback for local development
+
 export default function BlogsDashboard() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,7 +19,7 @@ export default function BlogsDashboard() {
                     window.location.href = '/blogs/login'; // Redirect to login if no token
                     return;
                 }
-                const res = await fetch('http://localhost:5000/blogs', {
+                const res = await fetch(`${BASEURL}/blogs`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
